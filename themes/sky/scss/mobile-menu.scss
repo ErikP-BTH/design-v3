@@ -1,0 +1,90 @@
+.nav-with-handle {
+    display: flex;
+    flex-direction: row-reverse;
+    margin-right: 1.5em;
+}
+
+.slide {
+    overflow-y: hidden !important;
+    transition: height 0.3s ease-in, filter 0.2s !important;
+}
+
+.nav ul {
+    display: flex;
+    justify-content: flex-end;
+    list-style: none;
+
+    li {
+        padding: 0 1em;
+    }
+}
+
+.nav a {
+    border-radius: 33%;
+    transition: box-shadow 0.3s, text-shadow 0.3s;
+
+    &:hover {
+        box-shadow: 0 0 8px rgb(222, 255, 91);
+        text-shadow: 0 0 3px rgb(183, 188, 85), 0 0 1px rgb(152, 152, 152);
+    }
+
+    &:active {
+        box-shadow: 0 0 25px rgb(222, 255, 91);
+        text-shadow: 0 0 14px rgb(183, 188, 85), 0 0 2px rgb(152, 152, 152);
+        transition: box-shadow 0.05s, text-shadow 0.05s;
+    }
+}
+
+.nav a, .nav-toggle {
+    color: rgb(51, 51, 51);
+}
+
+.nav-toggle {
+    width: 1em;
+    height: fit-content;
+    font-size: 2em;
+    transition: filter 0.2s, opacity 0.05s;
+
+    &:hover {
+        cursor: pointer;
+        filter: brightness(2.5);
+    }
+
+    &:active {
+        opacity: 0;
+    }
+
+    &[aria-expanded="true"] > :first-child::before {
+        content: '\2613';
+    }
+
+    &[aria-expanded="false"] > :first-child::before {
+        content: '\2630';
+    }
+}
+
+@media (max-width: 767px) {
+    .nav-with-handle {
+        align-items: center;
+    }
+
+    .nav-with-handle, .header, .nav ul {
+        flex-direction: column;
+    }
+
+    .nav ul li {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+
+        a {
+            display: block;
+            padding: 0.5em 0;
+        }
+    }
+
+    .js .nav-toggle {
+        margin-left: 1em;
+        line-height: 2em;
+    }
+}

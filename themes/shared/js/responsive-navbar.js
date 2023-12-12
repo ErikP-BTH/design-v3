@@ -28,8 +28,8 @@ function main()
 
     // responsive menu
     var menu = document.getElementById('nav'),
-        menuToggle = document.getElementById('nav-toggle'),
-        navIcon = document.getElementById('toggler')
+        menuToggle = document.getElementById('nav-toggle')
+        isMenuCollapsed = () => menuToggle.getAttribute('aria-expanded') === 'false',
         toggleMenuEvent = function (event) {
             if (event.type === 'keydown') {
                 if ((event.keyCode != 13) && (event.keyCode != 32)) {
@@ -39,9 +39,8 @@ function main()
 
             event.preventDefault();
 
-            if (menuToggle.getAttribute('aria-expanded') === 'false') {
+            if (isMenuCollapsed()) {
                 menuToggle.setAttribute('aria-expanded', 'true');
-                navIcon.className = 'fa fa-times';
 
                 utils.slideDown(menu, null, function () {
                     if (event.type === 'keydown') {
@@ -49,26 +48,23 @@ function main()
                     }
                 });
             } else {
-                navIcon.className = 'fa fa-bars';
                 menuToggle.setAttribute('aria-expanded', 'false');
                 utils.slideUp(menu);
             }
         },
         onResizeEvent = function () {
             if (utils.isElementVisible(menuToggle)) {
-                menu.className = 'hidden';
-                navIcon.className = 'fa fa-bars';
                 menuToggle.addEventListener('click', toggleMenuEvent);
                 menuToggle.addEventListener('keydown', toggleMenuEvent);
             } else {
                 menu.className = '';
-                navIcon.className = 'fa fa-times';
                 menu.removeAttribute('data-slide-id');
                 menuToggle.removeEventListener('click', toggleMenuEvent);
                 menuToggle.removeEventListener('keydown', toggleMenuEvent);
             }
         };
 
+    if (isMenuCollapsed()) menu.classList.add('hidden');
     window.addEventListener('resize', onResizeEvent);
     onResizeEvent();
 }

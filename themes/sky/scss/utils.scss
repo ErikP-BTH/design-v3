@@ -1,0 +1,49 @@
+.hidden {
+    display: none !important;
+}
+
+.active {
+    font-weight: bold;
+}
+
+@keyframes roll-in-element {
+    0% {
+        transform: translateX(-100%) rotate(-360deg);
+    }
+
+    50% {
+        transform: translateX(10%) rotate(15deg);
+    }
+
+    100% {
+        transform: translateX(0) rotate(0);
+    }
+}
+
+@keyframes highlight-element {
+    0% {
+        filter: brightness(1) drop-shadow(0 0 0 rgb(255, 225, 50));
+    }
+
+    50% {
+        filter: brightness(1.5) drop-shadow(0 0 15px rgb(255, 217, 0));
+    }
+
+    100% {
+        filter: brightness(1) drop-shadow(0 0 5px transparent);
+    }
+}
+
+@keyframes drop-down-element {
+    0% {
+        transform: translateY(-500%);
+    }
+
+    50% {
+        transform: translateY(10%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
