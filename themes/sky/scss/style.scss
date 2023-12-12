@@ -63,18 +63,18 @@ body {
     padding-left: 3em;
 }
 
-.title > a {
+.title > a > * {
     transition: text-shadow 0.2s;
 
     &:hover {
         text-shadow: 0 0 1px $font-color;
     }
 
-    & > :first-child {
+    &:first-child {
         animation: 1s ease drop-down-element;
     }
 
-    & > :last-child {
+    &:last-child {
         animation: 1.5s ease drop-down-element;
     }
 }

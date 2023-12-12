@@ -6294,16 +6294,16 @@ body {
   padding-left: 3em;
 }
 
-.title > a {
+.title > a > * {
   transition: text-shadow 0.2s;
 }
-.title > a:hover {
+.title > a > *:hover {
   text-shadow: 0 0 1px rgb(68, 68, 68);
 }
-.title > a > :first-child {
+.title > a > *:first-child {
   animation: 1s ease drop-down-element;
 }
-.title > a > :last-child {
+.title > a > *:last-child {
   animation: 1.5s ease drop-down-element;
 }
 
