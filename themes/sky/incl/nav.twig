@@ -25,7 +25,8 @@
                 <ul>
                     {% for page in pages(depthOffset=-1)|filter(page => page.title and not page.hidden) %}
                     <li{% if page.id == current_page.id %} class="active" {% endif %}>
-                        <a href="{{ page.title|lower not in page.url or '/?' in page.url ? page.url : page.url[0:-page.title|length] ~ '?' ~ page.title|lower }}">{{ page.title }}</a>
+                        {% set target = page.url|split('/')|last %}
+                        <a href="{{ page.title == 'Home' or '/?' in page.url ? page.url : page.url[0:-target|length] ~ '?' ~ target }}">{{ page.title }}</a>
                     </li>
                     {% endfor %}
                 </ul>
