@@ -1,0 +1,50 @@
+{% include 'incl/header.twig' %}
+
+<body>
+    {% include 'incl/nav.twig' %}
+
+    <div class="main" role="main">
+        {% set index_page_file_path = 'technology/index' %}
+        {% set index_page_content = index_page_file_path|content %}
+        {% set is_landingpage = current_page.title == pages[index_page_file_path].title %}
+        <div class="{{ is_landingpage ? 'landingpage' : 'technologypage' }}">
+            {% if is_landingpage %}
+            <h1>{{ current_page.title }}</h1>
+            {% else %}
+            <div>
+            {% endif %}
+
+            {% set technologies = index_page_content[3:-4]|split(', ') %}
+            {% for technology in is_landingpage ? technologies : technologies|sort %}
+            <div>
+                {% set link = '?technology/' ~ technology|lower %}
+                <a href="{{ link }}"><h3>{{ technology }}</h3></a>
+                {% if is_landingpage %}
+                <div>{{ ('<p>' ~ link[1:]|content|split('<p>')[1][0:-5] ~ '...</p>')|raw }}</div>
+                {% endif %}
+            </div>
+            {% endfor %}
+
+            {% if not is_landingpage %}
+            </div>
+            <div>
+                {% set header_and_content = content|split('<p>', 2) %}
+                {{ header_and_content[0]|raw }}
+                <div>
+                    {{ ('<p>' ~ header_and_content[1])|raw }}
+                </div>
+                <div>
+                    {% set next_page_wrapped = next_page.title|trim is empty ? pages[index_page_file_path] : next_page %}
+                    <a href="{{ previous_page.url }}">« {{ previous_page.title }}</a>
+                    <span>|</span>
+                    <a href="{{ next_page_wrapped.url }}">{{ next_page_wrapped.title }} »</a>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    {% include 'incl/footer.twig' %}
+</body>
+
+</html>

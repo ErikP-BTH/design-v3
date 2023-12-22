@@ -23,11 +23,10 @@
         <div class="nav">
             <div id="nav" role="navigation" tabindex="-1">
                 <ul>
-                    {% for page in pages(depthOffset=-1) if page.title and not page.hidden %}
-                        {% set urlSteps = page.url|split('/') %}
-                        <li{% if page.id==current_page.id %} class="active" {% endif %}>
-                            <a href="{{ '/?' in page.url ? page.url : page.url|slice(0, page.url|length - page.title|length) ~ '?' ~ page.title|lower }}">{{ page.title }}</a>
-                        </li>
+                    {% for page in pages(depthOffset=-1)|filter(page => page.title and not page.hidden) %}
+                    <li{% if page.id == current_page.id %} class="active" {% endif %}>
+                        <a href="{{ page.title|lower not in page.url or '/?' in page.url ? page.url : page.url[0:-page.title|length] ~ '?' ~ page.title|lower }}">{{ page.title }}</a>
+                    </li>
                     {% endfor %}
                 </ul>
             </div>

@@ -1,0 +1,167 @@
+.landingpage {
+    display: grid;
+    gap: 1em 1em;
+    margin-bottom: 0.5em;
+
+    > :first-child {
+        grid-column: span 3;
+        justify-self: center;
+    }
+
+    @for $i from 1 to 5 {
+        > :nth-child(#{$i * 2 + if($i > 2, 0, 1)}) {
+            grid-column: span if($i % 3 == 0, 3, 2);
+        }
+    }
+}
+
+.landingpage > :not(:first-child) {
+    position: relative;
+    overflow: hidden;
+    text-align: justify;
+    height: 4.4em;
+    border: 1px solid rgb(0, 0, 0);
+
+    > :last-child {
+        background-color: rgba(0, 0, 0, 0.05);
+        padding-right: 0.8em;
+    }
+
+    > :first-child > *, > :last-child {
+        padding-left: 0.3em;
+    }
+
+    a {
+        display: block;
+        position: relative;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.03);
+        text-decoration: none;
+    }
+
+    p {
+        display: inline;
+        text-align: justify;
+        font-size: 0.9em;
+        margin-right: -1em;
+        padding-right: 1em;
+    }
+
+    p::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        width: 1em;
+        height: 1em;
+        margin-top: 0.4em;
+        background: rgb(74, 242, 242);
+    }
+
+    &::before {
+        content: '...';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        height: 1.41em;
+    }
+}
+
+.landingpage a > :first-child {
+    height: 1.15em;
+    border-bottom: 2px solid rgb(37, 153, 255);
+    margin-bottom: 0;
+    transition: text-shadow 0.7s;
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: rgb(88, 57, 214);
+        transition: width 0.7s, box-shadow 0.1s;
+    }
+
+    &:hover::after {
+        width: 100%;
+    }
+
+    &:active::after {
+        box-shadow: 0 0 7px rgb(105, 68, 254);
+    }
+
+    &:hover {
+        text-shadow: 0 0 3px rgb(184, 170, 255);
+    }
+
+    &:active {
+        text-shadow: 0 0 10px rgb(115, 84, 255);
+        transition: text-shadow 0.1s;
+    }
+}
+
+.technologypage {
+    display: flex;
+}
+
+.technologypage > :first-child {
+    margin-right: 2em;
+
+    a {
+        transition: 0.1s text-shadow;
+    }
+
+    a:hover {
+        text-shadow: 0 0 3px rgb(184, 170, 255);
+    }
+
+    a:active {
+        text-shadow: 0 0 7px rgb(144, 121, 255);
+    }
+}
+
+.technologypage > :last-child {
+    width: 90%;
+
+    > :nth-child(2) {
+        overflow: auto;
+        height: 50vh;
+        padding-right: 0.5em;
+    }
+
+    > :last-child {
+        display: flex;
+        justify-content: space-between;
+        margin: auto;
+        width: 12em;
+    }
+
+    a {
+        transition: 0.2s filter;
+    }
+
+    a:hover {
+        filter: brightness(1.5);
+    }
+
+    a:active {
+        filter: brightness(1.7);
+    }
+}
+
+@media (max-width: 767px) {
+    .landingpage > :not(:first-child) {
+        grid-column: span 3;
+    }
+
+    .technologypage {
+        > :first-child {
+            display: none;
+        }
+
+        > :last-child > :nth-child(2) {
+            height: 70vh;
+        }
+    }
+}

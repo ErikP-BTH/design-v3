@@ -5,6 +5,9 @@ $fa-font-path: '../../shared/fontawesome/webfonts';
 @import '../../shared/fontawesome/scss/regular';
 @import 'variables';
 @import 'mobile-menu';
+@import 'technology';
+@import 'blockquotes';
+@import 'code';
 @import 'utils';
 @import 'fonts';
 
@@ -14,6 +17,24 @@ $fa-font-path: '../../shared/fontawesome/webfonts';
     border: 0 none;
     margin: 0;
     padding: 0;
+    scrollbar-width: thin;
+    scrollbar-color: rgb(18, 33, 237) rgb(30, 37, 132);
+}
+
+*::-webkit-scrollbar {
+    width: 0.6vw;
+}
+
+*::-webkit-scrollbar-track {
+    background: rgb(30, 37, 132);
+}
+
+*::-webkit-scrollbar-thumb {
+    background: rgb(18, 33, 237);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background: rgb(51, 114, 239);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -33,7 +54,7 @@ html, body {
 body {
     display: flex;
     flex-direction: column;
-    background: linear-gradient(to bottom, $background-color, $background-alternative-color);
+    background: linear-gradient(to bottom, $background-color, $background-alternative-color 80%, $background-color 99%);
 }
 
 .header, .main, .footer {
@@ -63,6 +84,14 @@ body {
     padding-left: 3em;
 }
 
+.title * {
+    color: $font-bold-color;
+}
+
+.title p {
+    font-style: italic;
+}
+
 .title > a > * {
     transition: text-shadow 0.2s;
 
@@ -81,7 +110,7 @@ body {
 
 .logo {
     transform-origin: 63% 47%;
-    animation: 1.5s roll-in-element, 0.75s 0.6s highlight-element;
+    animation: 1.5s roll-in-element, 0.75s 0.75s highlight-element;
 }
 
 .title-with-logo {
@@ -120,14 +149,6 @@ body {
         flex-direction: column;
         align-items: center;
     }
-}
-
-.title * {
-    color: $font-bold-color;
-}
-
-.title p {
-    font-style: italic;
 }
 
 /* Footer */
