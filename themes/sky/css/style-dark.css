@@ -6695,3 +6695,109 @@ ol, ul {
 img {
   max-width: 100%;
 }
+
+body {
+  background: linear-gradient(to bottom, rgb(20, 20, 20), rgb(0, 204, 204) 80%, rgb(20, 20, 20) 99%);
+  color: rgb(227, 227, 227);
+}
+
+.main p {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 0.4em;
+  padding: 0.3em;
+}
+.main a {
+  color: rgb(50, 123, 247);
+}
+.main a:visited {
+  color: rgb(220, 50, 240);
+}
+
+.nav a, .nav-toggle {
+  color: rgb(211, 211, 211);
+}
+
+.title * {
+  color: rgb(244, 244, 244);
+}
+.title > a > :hover {
+  text-shadow: 0 0 1px rgb(227, 227, 227);
+}
+
+.title-with-logo img {
+  filter: drop-shadow(2px 0 10px rgba(0, 0, 0, 0.7));
+}
+.title-with-logo .logo > :first-child::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  border-radius: 50%;
+  box-shadow: inset 3px 3px 10px 0 rgb(0, 0, 0);
+  height: 100%;
+  width: 100%;
+}
+
+.landingpage a > :first-child::after {
+  background: rgb(136, 0, 255);
+}
+.landingpage a > :first-child:active::after {
+  box-shadow: 0 0 7px rgb(141, 113, 252);
+}
+.landingpage a > :first-child:hover {
+  text-shadow: 0 0 4px rgb(50, 14, 228);
+}
+.landingpage a > :first-child:active {
+  text-shadow: 0 0 10px rgb(115, 84, 255);
+}
+
+.landingpage > :not(:first-child) > :first-child {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.landingpage > :not(:first-child) > :last-child {
+  background-color: rgb(1, 70, 70);
+}
+.landingpage > :not(:first-child) p {
+  background: none;
+}
+.landingpage > :not(:first-child) p::after {
+  background: rgb(1, 70, 70);
+}
+
+.entry > :first-child {
+  background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.3) 7%, transparent 95%);
+}
+
+.entry > :last-child > :last-child {
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 1em;
+  padding: 0 0.2em;
+}
+.entry > :last-child h3 {
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 0.3em;
+}
+.entry > :last-child :not(li) > ul {
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 0.2em;
+}
+.entry > :last-child li > ul {
+  position: relative;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.5), transparent 1.2em), linear-gradient(to right, transparent, rgba(0, 0, 0, 0.3) 0.7em, transparent), repeating-linear-gradient(to bottom, transparent 0 1.48em, rgb(240, 248, 255) 1.55em);
+}
+.entry > :last-child ul a::before {
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.1), transparent);
+}
+
+.footer {
+  border-top: 1px solid rgb(154, 154, 154);
+}
+.footer a {
+  color: rgb(189, 183, 175);
+}
+.footer a:hover {
+  filter: brightness(1.5) drop-shadow(0 0 4px rgb(215, 215, 215));
+}
+.footer a:active {
+  filter: brightness(0.8) drop-shadow(0 0 8px rgb(215, 215, 215));
+}

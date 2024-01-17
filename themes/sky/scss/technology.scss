@@ -16,18 +16,22 @@
 }
 
 .landingpage > :not(:first-child) {
+    display: flex;
+    flex-direction: column;
     position: relative;
     overflow: hidden;
     text-align: justify;
     height: 4.4em;
-    border: 1px solid rgb(0, 0, 0);
+    border: 1px solid $article-border-color;
 
     > :last-child {
         background-color: rgba(0, 0, 0, 0.05);
+        height: 70%;
         padding-right: 0.8em;
     }
 
     > :first-child > *, > :last-child {
+        flex: 1;
         padding-left: 0.3em;
     }
 
@@ -41,7 +45,6 @@
 
     p {
         display: inline;
-        text-align: justify;
         font-size: 0.9em;
         margin-right: -1em;
         padding-right: 1em;
@@ -52,9 +55,9 @@
         position: absolute;
         right: 0;
         width: 1em;
-        height: 1em;
+        height: 2.8em;
         margin-top: 0.4em;
-        background: rgb(74, 242, 242);
+        background: $ellipsis-color;
     }
 
     &::before {
@@ -68,7 +71,7 @@
 
 .landingpage a > :first-child {
     height: 1.15em;
-    border-bottom: 2px solid rgb(37, 153, 255);
+    border-bottom: 2px solid $article-header-border-color;
     margin-bottom: 0;
     transition: text-shadow 0.7s;
 
@@ -79,7 +82,7 @@
         left: 0;
         width: 0;
         height: 1px;
-        background: rgb(88, 57, 214);
+        background: $article-header-border-hover-color;
         transition: width 0.7s, box-shadow 0.1s;
     }
 
@@ -88,46 +91,99 @@
     }
 
     &:active::after {
-        box-shadow: 0 0 7px rgb(105, 68, 254);
+        box-shadow: 0 0 7px $article-header-border-active-color;
     }
 
     &:hover {
-        text-shadow: 0 0 3px rgb(184, 170, 255);
+        text-shadow: 0 0 3px $article-header-hover-color;
     }
 
     &:active {
-        text-shadow: 0 0 10px rgb(115, 84, 255);
+        text-shadow: 0 0 10px $article-header-active-color;
         transition: text-shadow 0.1s;
     }
 }
 
-.technologypage {
+.entry {
     display: flex;
-}
+    height: 100%;
 
-.technologypage > :first-child {
-    margin-right: 2em;
+    img {
+        max-width: 55%;
+    }
+
+    h1 {
+        margin: 0;
+    }
 
     a {
-        transition: 0.1s text-shadow;
+        transition: 0.3s filter;
     }
 
     a:hover {
-        text-shadow: 0 0 3px rgb(184, 170, 255);
+        filter: brightness(1.5);
     }
 
     a:active {
-        text-shadow: 0 0 7px rgb(144, 121, 255);
+        filter: brightness(2);
     }
 }
 
-.technologypage > :last-child {
-    width: 90%;
+.entry li > ul > li {
+    position: relative;
+
+    a {
+        display: block;
+    }
+
+    a::before {
+        content: '';
+        position: absolute;
+        left: -1.5em;
+        width: 0;
+        height: 100%;
+        background: linear-gradient(to right, rgba(0, 0, 0, 0.05), transparent);
+        transition: 0.3s width;
+    }
+
+    a:hover::before {
+        width: 100%;
+    }
+}
+
+.entry .color-palette {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 0.2em;
+
+    table {
+        border-spacing: 4px;
+        border-collapse: separate;
+    }
+
+    td {
+        width: 50px;
+        height: 50px;
+        border: solid rgb(0, 0, 0) 1px;
+    }
+}
+
+.entry > :first-child {
+    padding-left: 0.4em;
+    padding-right: 2em;
+    margin-right: 2em;
+}
+
+.entry > :last-child {
+    display: flex;
+    flex-direction: column;
 
     > :nth-child(2) {
         overflow: auto;
         height: 50vh;
+        padding: 2% 0;
         padding-right: 0.5em;
+        mask: linear-gradient(to top, rgba(0, 0, 0, 0.2) 1%, black 2% 95%, rgba(0, 0, 0, 0.2) 98% 100%), linear-gradient(to left, black 0 8px, transparent 8px 100%);
     }
 
     > :last-child {
@@ -137,16 +193,10 @@
         width: 12em;
     }
 
-    a {
-        transition: 0.2s filter;
-    }
-
-    a:hover {
-        filter: brightness(1.5);
-    }
-
-    a:active {
-        filter: brightness(1.7);
+    h3 {
+        margin: 0;
+        margin-top: 0.5em;
+        padding: 0.3em;
     }
 }
 
@@ -155,7 +205,11 @@
         grid-column: span 3;
     }
 
-    .technologypage {
+    .entry {
+        img {
+            max-width: 100%;
+        }
+
         > :first-child {
             display: none;
         }

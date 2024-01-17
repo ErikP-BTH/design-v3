@@ -15,5 +15,5 @@
     {% endif %}
 
     <link rel="icon" href="{{ theme_url }}/../shared/img/favicon.ico">
-    <link rel="stylesheet" href="{{ theme_url }}/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="{{ theme_url }}/css/style{{ config.session.theme is empty ? '' : '-' ~ config.session.theme }}.css" type="text/css" />
 </head>

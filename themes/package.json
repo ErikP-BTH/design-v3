@@ -4,10 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "stylelint \"**/*.scss\"",
-    "style": "sass sky/scss/style.scss sky/css/style.css --no-source-map",
-    "style-min": "sass sky/scss/style.scss sky/css/style.min.css --no-source-map --style compressed"
-  },
+    "watch": "sass sky/scss/style.scss:sky/css/style.css sky/scss/style-dark.scss:sky/css/style-dark.css --no-source-map --watch",
+    "watch-min": "sass sky/scss/style.scss:sky/css/style.min.css sky/scss/style-dark.scss:sky/css/style-dark.min.css --no-source-map --watch --style compressed",
+    "style": "npm run style-light && npm run style-dark",
+    "style-min": "npm run style-light-min && npm run style-dark-min",
+    "style-dark": "sass sky/scss/style-dark.scss sky/css/style-dark.css --no-source-map",
+    "style-dark-min": "sass sky/scss/style-dark.scss sky/css/style-dark.min.css --no-source-map --style compressed",
+    "style-light": "sass sky/scss/style.scss sky/css/style.css --no-source-map",
+    "style-light-min": "sass sky/scss/style.scss sky/css/style.min.css --no-source-map --style compressed"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",

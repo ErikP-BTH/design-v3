@@ -1,0 +1,136 @@
+@import 'style';
+
+body {
+    background: linear-gradient(to bottom, $background-color-alt, $background-color-second-alt 80%, $background-color-alt 99%);
+    color: $font-color-alt;
+}
+
+.main {
+    p {
+        background: $p-background-color-alt;
+        border-radius: 0.4em;
+        padding: 0.3em;
+    }
+
+    a {
+        color: $link-color-alt;
+    }
+
+    a:visited {
+        color: $link-visited-color-alt;
+    }
+}
+
+.nav a, .nav-toggle {
+    color: $nav-handle-color-alt;
+}
+
+.title {
+    * {
+        color: $font-color-bold-alt;
+    }
+
+    > a > :hover {
+        text-shadow: 0 0 1px $font-color-alt;
+    }
+}
+
+.title-with-logo {
+    img {
+        filter: drop-shadow(2px 0 10px rgba(0, 0, 0, 0.7));
+    }
+
+    .logo > :first-child::after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        border-radius: 50%;
+        box-shadow: inset 3px 3px 10px 0 rgb(0, 0, 0);
+        height: 100%;
+        width: 100%;
+    }
+}
+
+.landingpage a > :first-child {
+    &::after {
+        background: $article-header-border-hover-color-alt;
+    }
+
+    &:active::after {
+        box-shadow: 0 0 7px $article-header-border-active-color-alt
+    }
+
+    &:hover {
+        text-shadow: 0 0 4px $article-header-hover-color-alt;
+    }
+
+    &:active {
+        text-shadow: 0 0 10px $article-header-active-color-alt;
+    }
+}
+
+.landingpage > :not(:first-child) {
+    > :first-child {
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    > :last-child {
+        background-color: $ellipsis-color-alt;
+    }
+
+    p {
+        background: none;
+    }
+
+    p::after {
+        background: $ellipsis-color-alt;
+    }
+}
+
+.entry > :first-child {
+    background: linear-gradient(to right, transparent, $p-background-color-alt 7%, transparent 95%);
+}
+
+.entry > :last-child {
+    > :last-child {
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 1em;
+        padding: 0 0.2em;
+    }
+
+    h3 {
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 0.3em;
+    }
+
+    :not(li) > ul {
+        background: rgba(0, 0, 0, 0.4);
+        border-radius: 0.2em;
+    }
+
+    li > ul {
+        position: relative;
+        background: linear-gradient(to right, rgba(0, 0, 0, 0.5), transparent 1.2em), linear-gradient(to right, transparent, rgba(0, 0, 0, 0.3) 0.7em, transparent), repeating-linear-gradient(to bottom, transparent 0 1.48em, rgb(240, 248, 255) 1.55em);
+    }
+
+    ul a::before {
+        background: linear-gradient(to right, rgba(255, 255, 255, 0.1), transparent);
+    }
+}
+
+.footer {
+    border-top: 1px solid $line-color-alt;
+
+    a {
+        color: $icon-color-alt;
+    }
+
+    a:hover {
+        filter: brightness(1.5) drop-shadow(0 0 4px $icon-glow-color-alt);
+    }
+
+    a:active {
+        filter: brightness(0.8) drop-shadow(0 0 8px $icon-glow-color-alt);
+    }
+}

@@ -18,7 +18,7 @@ $fa-font-path: '../../shared/fontawesome/webfonts';
     margin: 0;
     padding: 0;
     scrollbar-width: thin;
-    scrollbar-color: rgb(18, 33, 237) rgb(30, 37, 132);
+    scrollbar-color: $scrollbar-color $scrollbar-background-color;
 }
 
 *::-webkit-scrollbar {
@@ -26,23 +26,15 @@ $fa-font-path: '../../shared/fontawesome/webfonts';
 }
 
 *::-webkit-scrollbar-track {
-    background: rgb(30, 37, 132);
+    background: $scrollbar-background-color;
 }
 
 *::-webkit-scrollbar-thumb {
-    background: rgb(18, 33, 237);
+    background: $scrollbar-color;
 }
 
 *::-webkit-scrollbar-thumb:hover {
-    background: rgb(51, 114, 239);
-}
-
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Open Sans', sans-serif;
-}
-
-ol, ul {
-    padding-left: 1.5em;
+    background: $scrollbar-color-hover;
 }
 
 html, body {
@@ -54,7 +46,7 @@ html, body {
 body {
     display: flex;
     flex-direction: column;
-    background: linear-gradient(to bottom, $background-color, $background-alternative-color 80%, $background-color 99%);
+    background: linear-gradient(to bottom, $background-color, $background-color-second 80%, $background-color 99%);
 }
 
 .header, .main, .footer {
@@ -63,6 +55,7 @@ body {
 
 .main {
     flex: 1 0 auto;
+    padding-bottom: 0.2em;
 }
 
 .header, .footer {
@@ -81,11 +74,11 @@ body {
 /* Title */
 
 .title, .logo {
-    padding-left: 3em;
+    margin-left: 3em;
 }
 
 .title * {
-    color: $font-bold-color;
+    color: $font-color-bold;
 }
 
 .title p {
@@ -109,7 +102,10 @@ body {
 }
 
 .logo {
-    transform-origin: 63% 47%;
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+    transition: filter 0.2s;
     animation: 1.5s roll-in-element, 0.75s 0.75s highlight-element;
 }
 
@@ -119,10 +115,10 @@ body {
 
     img {
         border-radius: 50%;
-        transition: filter 0.2s;
+        transition: 0.2s filter;
     }
 
-    img:hover {
+    .logo:hover {
         filter: brightness(1.1);
     }
 }
@@ -133,7 +129,7 @@ body {
     }
 
     .title, .logo {
-        padding: 1em 1em 1em 0;
+        margin: 1em;
     }
 
     .title {
@@ -142,7 +138,7 @@ body {
 
     .logo {
         max-width: 30%;
-        transform-origin: 43% 43%;
+        transform-origin: 40% 48%;
     }
 
     .footer {
@@ -158,6 +154,7 @@ body {
     justify-content: space-between;
     border-top: 1px solid $font-color;
     margin-bottom: 0.5em;
+    padding-top: 0.2em;
 
     a {
         color: $font-color;
@@ -165,7 +162,11 @@ body {
     }
 
     a:hover {
-        filter: brightness(1.5) drop-shadow(0 0 4px $font-alternative-color);
+        filter: brightness(1.5) drop-shadow(0 0 4px $font-color-alt);
+    }
+
+    a:active {
+        filter: brightness(0.8) drop-shadow(0 0 8px $font-color-alt);
     }
 
     .social {
@@ -188,8 +189,17 @@ p, td, th, li, dd {
 }
 
 h1, h2, h3, h4, h5, h6 {
+    font-family: 'Open Sans', sans-serif;
     margin-bottom: 0.6em;
     font-weight: bold;
+}
+
+h2 {
+    margin-top: 0.8em;
+}
+
+ol, ul {
+    padding-left: 1.5em;
 }
 
 img {

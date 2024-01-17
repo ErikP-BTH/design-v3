@@ -9,7 +9,7 @@ const keywordStatementsForTwig = ['include', 'set'];
 
 const codeBlocks = document.getElementsByTagName('code');
 for (const codeBlock of codeBlocks) {
-    const chunks = codeBlock.textContent.split(/(\s+|\.|,|\||{|}|\[|\]|\(|\)|<\?[a-zA-Z]+|<\/?|\/?>|=+>?|\+|!|(?::|;)+\s+)/).filter(item => item !== undefined && item !== '');
+    const chunks = codeBlock.textContent.split(/(\s+|\.|,|\||{|}|\[|\]|\(|\)|<\?[a-zA-Z]+|<\/?|\/?>|=+>?|\+|!|(?::|;)+\s?)/).filter(item => item !== undefined && item !== '');
     const chunkAmount = chunks.length;
     const chunkElements = [];
 
@@ -19,9 +19,10 @@ for (const codeBlock of codeBlocks) {
     const openedBrackets = [[['{', '}'], 0], [['[', ']'], 0], [['(', ')'], 0]];
 
     let openingQuote = '';
-    let isQuoteOpened = false;
-    let isMarkdownMetaDataSectionOpened = false;
+    let isQuoteOpen = false;
+    let isMarkdownMetaDataSectionOpen = false;
     let isInsideTag = false;
+    let isCssRuleOpen = false;
     for (let i = 0; i < chunkAmount; i++) {
         const chunk = chunks[i];
         const code = document.createElement('span');
@@ -32,14 +33,14 @@ for (const codeBlock of codeBlocks) {
         const chunkStartsWith = (regexAsString, indexOffset = 0) => (indexOffset > 0 ? i + indexOffset < chunkAmount : i + indexOffset >= 0) && chunks[i + indexOffset].match(new RegExp('^' + regexAsString));
 
         if (quoteTypes.some(quote => chunk.includes(quote))) {
-            if (!isQuoteOpened) openingQuote = chunk.split('').find(character => quoteTypes.find(quote => quote === character));
+            if (!isQuoteOpen) openingQuote = chunk.split('').find(character => quoteTypes.find(quote => quote === character));
             if ((chunk.match(new RegExp(openingQuote, 'g')) || []).length % 2 !== 0) {
-                if (isQuoteOpened) openingQuote = '';
-                isQuoteOpened = !isQuoteOpened;
+                if (isQuoteOpen) openingQuote = '';
+                isQuoteOpen = !isQuoteOpen;
             }
             codeStyle.add('string');
         }
-        else if (isQuoteOpened) codeStyle.add('string');
+        else if (isQuoteOpen) codeStyle.add('string');
 
         else if ((chunk.includes('<') && chunkStartsWith('[a-zA-Z]', 1)) || (chunk.includes('>') && chunkStartsWith('[a-zA-Z]|\\s+|' + quoteTypes.join('|'), -1))) {
             isInsideTag = chunk.includes('<');
@@ -49,8 +50,8 @@ for (const codeBlock of codeBlocks) {
         else if (isInsideTag && !chunk.startsWith('=')) codeStyle.add('attribute');
 
         else if (codeBlockLanguage === 'html') {}
-        else if (isLanguageIncludingMarkdown && chunk === '---') isMarkdownMetaDataSectionOpened = !isMarkdownMetaDataSectionOpened;
-        else if (isMarkdownMetaDataSectionOpened) {
+        else if (isLanguageIncludingMarkdown && chunk === '---') isMarkdownMetaDataSectionOpen = !isMarkdownMetaDataSectionOpen;
+        else if (isMarkdownMetaDataSectionOpen) {
             if (chunkStartsWith(':', 1)) codeStyle.add('meta-attribute');
             else if (!chunk.startsWith(':')) codeStyle.add('string');
         }
@@ -67,9 +68,11 @@ for (const codeBlock of codeBlocks) {
         else if (chunk.match(/[a-zA-Z]/) && chunkStartsWith('\\(', 1)) codeStyle.add('function');
         else if (chunk.match(/^-?\d/)) codeStyle.add('number');
         else if (codeBlockLanguage === 'css') {
-            if (chunk.match(/[a-zA-Z]/)) {
+            if (chunk.includes(':')) isCssRuleOpen = true;
+            else if (chunk.includes(';')) isCssRuleOpen = false;
+            else if (chunk.match(/[a-zA-Z]/)) {
                 if (chunkStartsWith(':', 1)) codeStyle.add('property');
-                else if (chunkStartsWith(':', -1)) codeStyle.add('string');
+                else if (isCssRuleOpen) codeStyle.add('string');
                 else codeStyle.add('selector');
             }
         }

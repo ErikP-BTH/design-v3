@@ -5,8 +5,8 @@
 }
 
 .slide {
-    overflow-y: hidden !important;
-    transition: height 0.3s ease-in, filter 0.2s !important;
+    overflow-y: hidden;
+    transition: height 0.3s ease-in, filter 0.2s;
 }
 
 .nav ul {
@@ -24,19 +24,19 @@
     transition: box-shadow 0.3s, text-shadow 0.3s;
 
     &:hover {
-        box-shadow: 0 0 8px rgb(222, 255, 91);
-        text-shadow: 0 0 3px rgb(183, 188, 85), 0 0 1px rgb(152, 152, 152);
+        box-shadow: 0 0 8px $nav-selection-box-shadow-color;
+        text-shadow: 0 0 3px $nav-selection-text-shadow-color, 0 0 1px $nav-selection-text-shadow-color-second;
     }
 
     &:active {
-        box-shadow: 0 0 25px rgb(222, 255, 91);
-        text-shadow: 0 0 14px rgb(183, 188, 85), 0 0 2px rgb(152, 152, 152);
+        box-shadow: 0 0 25px $nav-selection-box-shadow-color;
+        text-shadow: 0 0 14px $nav-selection-text-shadow-color, 0 0 2px $nav-selection-text-shadow-color-second;
         transition: box-shadow 0.05s, text-shadow 0.05s;
     }
 }
 
 .nav a, .nav-toggle {
-    color: rgb(51, 51, 51);
+    color: $nav-handle-color;
 }
 
 .nav-toggle {

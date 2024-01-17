@@ -1,11 +1,11 @@
 <div class="header" role="banner">
     <div class="title-with-logo">
         {% if pages["_meta"].meta.logo %}
-        <div class="logo">
-            <a href="{{ base_url }}">
+        <a class="logo" href="{{ base_url }}">
+            <div>
                 <img src="{{ base_url }}/{{ pages["_meta"].meta.logo|url }}" alt="Pico's logo as a circle with white text and green background." />
-            </a>
-        </div>
+            </div>
+        </a>
         {% endif %}
         <div class="title">
             <a href="{{ base_url }}">

@@ -4,24 +4,25 @@
     {% include 'incl/nav.twig' %}
 
     <div class="main" role="main">
-        {% set base_path = '?technology/' %}
+        {% set is_analysis = 'analysis' in current_page.url|split('?')|last %}
+        {% set base_path = is_analysis ? '?analysis/' : '?technology/' %}
         {% set index_page_file_path = base_path[1:] ~ 'index' %}
         {% set index_page_content = index_page_file_path|content %}
         {% set is_landingpage = current_page.title == pages[index_page_file_path].title %}
-        <div class="{{ is_landingpage ? 'landingpage' : 'technologypage' }}">
+        <div class="{{ is_landingpage ? 'landingpage' : 'entry' }}">
             {% if is_landingpage %}
             <h1>{{ current_page.title }}</h1>
             {% else %}
             <div>
             {% endif %}
 
-            {% set technologies = index_page_content[3:-4]|split(', ') %}
-            {% for technology in is_landingpage ? technologies : technologies|sort %}
+            {% set article_titles = index_page_content[3:-4]|split(', ') %}
+            {% for title in is_landingpage ? article_titles : article_titles|sort %}
             <div>
-                {% set link = base_path ~ technology|lower %}
-                <a href="{{ link }}"><h3>{{ technology }}</h3></a>
+                {% set link = base_path ~ title|lower|replace({' ': '_'}) %}
+                <a href="{{ link }}"><h3>{{ is_analysis ? title|split(' ', 2)[1] : title }}</h3></a>
                 {% if is_landingpage %}
-                <div>{{ ('<p>' ~ link[1:]|content|split('<p>')[1][0:-5] ~ '...</p>')|raw }}</div>
+                <div>{{ ('<p>' ~ link[1:]|content|split('<p>')[1:]|join|split('</p>')[0] ~ '...</p>')|raw }}</div>
                 {% endif %}
             </div>
             {% endfor %}
@@ -34,9 +35,9 @@
                 <div>{{ ('<p>' ~ header_and_content[1])|raw }}</div>
                 <div>
                     {% set next_page_wrapped = next_page.title|trim is empty ? pages[index_page_file_path] : next_page %}
-                    <a href="{{ base_path ~ (previous_page.url ends with base_path[1:-1] ? '' : ('%2F' in previous_page.url ? previous_page.url|split('%2F', 2) : previous_page.url|split('/'))|last }}">« {{ previous_page.title }}</a>
+                    <a href="{{ base_path ~ (previous_page.url ends with base_path[1:-1] ? '' : previous_page.url|split('%2F' in next_page_wrapped.url ? '%2F' : '/')|last) }}">« {{ previous_page.title }}</a>
                     <span>|</span>
-                    <a href="{{ base_path ~ (next_page_wrapped.url ends with base_path[1:-1] ? '' : ('%2F' in next_page_wrapped.url ? next_page_wrapped.url|split('%2F', 2) : next_page_wrapped.url|split('/'))|last) }}">{{ next_page_wrapped.title }} »</a>
+                    <a href="{{ base_path ~ (next_page_wrapped.url ends with base_path[1:-1] ? '' : next_page_wrapped.url|split('%2F' in next_page_wrapped.url ? '%2F' : '/')|last) }}">{{ next_page_wrapped.title }} »</a>
                 </div>
             </div>
             {% endif %}
